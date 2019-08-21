@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
+	<style>
+	.ssp {font-family: 'Source Sans Pro', sans-serif}
+	.saraban {font-family: 'Sarabun', sans-serif;}
+	body {margin:0;}
+	* {
+	box-sizing: border-box;
+	}
+
+	fieldset {
+	display: block;
+	margin-left: 10px;
+	margin-right: 2px;
+	padding-top: 0.35em;
+	padding-bottom: 0.625em;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
+	border: 2px groove (internal value);
+	width:380px;
+	font-size:18px;
+	}
+	.small {
+	width:300px;
+	}
+	.left {
+	float:left;
+	width:50%;
+	}
+	.right {
+	float:left;
+	width:50%;
+	}
+	.button {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-left: 10px;
+	margin-right: 2px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+	}
+	.button1 {
+	background-color: white;
+	color: black;
+	border: 2px solid #000000;
+		position: relative;
+	}
+
+	.button1:hover {
+	background-color: #000000;
+	color: white;
+	}
+	.rightmenu {
+		font-family: 'Source Sans Pro', sans-serif; background-color: green;
+	}
+	.leftmenu {
+		font-family: 'Source Sans Pro', sans-serif; background-color: grey;
+	}
+	ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: white	;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	}
+
+	li {
+	float: left;
+	}
+
+	li a {
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	}
+
+	.rightmenu {
+	background-color: red;
+	}
+	.fix{
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;	
+	}
+	</style>
+</head>
+	<body>
+	<ul>
+        <li style="float:right;background-color: red;"><a class="ssp" class="rightmenu" href="{% url 'webapp:logout' %}">Logout</a></li>
+        <li style="float:right"><a href="{% url 'webapp:home' %}" class="ssp" >{{ user.get_username }}</a></li>
+		<li style="float:left;background-color: pink;" class="ssp"><a href="{% url 'webapp:infor' %}">History</a></li>
+		<li><a style="position:absolute;left: 40%;font-size:120%;" class="saraban">กรอกข้อมูลผู้มาใช้บริการ</a></li>
+	</ul>
+	</br>
+	</br>
+	</br>
+	</br>
+	<div style="position:absolute;width: 100%;top:50%;left:80%"><img src="http://pngimg.com/uploads/refrigerator/refrigerator_PNG9055.png" width="300" height="300"></div>
+			<fieldset style="width:670px">
+			<legend><h3 class="saraban">ลงทะเบียนใช้งาน</h3></legend>
+				<table border="1">
+				<tr  class="saraban">
+					<th>หมายเลขบัตร</th>
+					<th>ชื่อ/ห้องผู้ใช้งาน</th>
+					<th>เวลาลงทะเบียน</th>
+				</tr>
+						{% for data in information %}
+							<div style="overflow-x:auto;"></div>
+							<tr class="saraban">
+								<form action="{% url 'webapp:action' data.id%}" method="post">
+								{% csrf_token %}
+								<td>{{data.id}}</td>
+								<td><input type="text" name="name" placeholder={{data.name}} value={{data.name}}></td>
+								<td style="font-size: 80%;">{{data.datetime_regis}}</td>
+
+								<td><input type="submit" name="save" value="Save"></td>
+								<td><input type="submit" name="delete" value="Delete"></td>
+								</form>
+							</tr>
+
+							</div>
+						</form>
+						{% endfor %}
+								<form action="{% url 'webapp:regis' %}" method="post">
+								{% csrf_token %}
+								<tr class="saraban">
+								<td><input type="text" name="id" placeholder="ID Card"></td>
+								<td><input type="text" name="name" placeholder="Name"></td>
+								<td></td>
+
+								<td><input type="submit" value="Enter"></td>
+								</tr>
+								</form>
+				</table>
+			</fieldset>
+			{{ err }}
+			</br>
+	</body>
+</html>

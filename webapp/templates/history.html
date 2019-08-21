@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
+	<style>
+	.ssp {font-family: 'Source Sans Pro', sans-serif}
+	.saraban {font-family: 'Sarabun', sans-serif;}
+	body {margin:0;}
+	* {
+	box-sizing: border-box;
+	}
+
+	fieldset {
+	display: block;
+	margin-left: 10px;
+	margin-right: 2px;
+	padding-top: 0.35em;
+	padding-bottom: 0.625em;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
+	border: 2px groove (internal value);
+	width:380px;
+	font-size:18px;
+	}
+	.fix{
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;	
+	}
+	</style>
+</head>
+
+<body>
+    <fieldset>
+    <h3 class = "saraban">ประวัติการแสกนบัตร</h3>
+    <table border="1">
+    <tr class = "saraban"> 
+        <th>ครั้งที่</th>
+        <th>รหัสอาเอฟไอดี</th>
+        <th>วันเวลา</th>
+    </tr>
+            <span>
+                {% for userLog in log %}
+            </span>
+            <div style="overflow-x:auto;"></div>
+            <tr class = "saraban">
+                <td style="font-size: 80%">{{userLog.time}}</td>
+                <td style="font-size: 80%">{{userLog.id}}</td>
+                <td style="font-size: 80%">{{userLog.datetime}}</td>
+            </tr>
+            </div>
+            </form>
+
+            {% endfor%}
+    </table>
+</body>
+</html>
